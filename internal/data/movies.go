@@ -1,7 +1,7 @@
 package data
 
 import (
-	valdator "github.com/allanfp09/greenlight/internal/validator"
+	validator "github.com/allanfp09/greenlight/internal/validator"
 	"time"
 )
 
@@ -15,7 +15,7 @@ type Movie struct {
 	Version   int32     `json:"version"`
 }
 
-func ValidateMovie(v *valdator.Validator, movie *Movie) {
+func ValidateMovie(v *validator.Validator, movie *Movie) {
 	v.Check(movie.Title != "", "title", "must be provided")
 	v.Check(len(movie.Title) <= 500, "title", "must not be more than 500 bytes long")
 
@@ -29,5 +29,5 @@ func ValidateMovie(v *valdator.Validator, movie *Movie) {
 	v.Check(movie.Genres != nil, "genres", "must be provided")
 	v.Check(len(movie.Genres) >= 1, "genres", "must contain at least 1 genre")
 	v.Check(len(movie.Genres) <= 5, "genres", "must not contain more than 5 genres")
-	v.Check(valdator.Unique(movie.Genres), "genres", "must not contain duplicate values")
+	v.Check(validator.Unique(movie.Genres), "genres", "must not contain duplicate values")
 }
